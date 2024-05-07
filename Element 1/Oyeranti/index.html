@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Interactive Scatter Plot</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+  <body>
+    
+    <a href="../World%20Temperature%20Visualization.html" class="home-link">Home</a>
+
+    <div class="description-container">
+      <h1>
+        Scatter Plot showing the relationship between Population and average
+        decade temperature of cities in the United Kingdom (1980-2020)
+      </h1>
+      <h3>
+        By Oluwaseun Oyeranti - C2068763
+      </h3>
+    </div>
+    <div id="chart-container">
+      <div id="decadeSelect">
+        <label class="decade-option">
+          <input type="radio" name="decade" value="OverallAverage" checked />
+          Overall Average
+        </label>
+        <label class="decade-option">
+          <input
+            type="radio"
+            name="decade"
+            value="OverallAverage1980sTo2010s"
+          />
+          Overall Average (1980s - 2010s)
+        </label>
+        <label class="decade-option">
+          <input type="radio" name="decade" value="1980s" /> 1980s
+        </label>
+        <label class="decade-option">
+          <input type="radio" name="decade" value="1990s" /> 1990s
+        </label>
+        <label class="decade-option">
+          <input type="radio" name="decade" value="2000s" /> 2000s
+        </label>
+        <label class="decade-option">
+          <input type="radio" name="decade" value="2010s" /> 2010s
+        </label>
+        <label class="decade-option">
+          <input type="radio" name="decade" value="2020s" /> 2020s
+        </label>
+      </div>
+      <svg width="800" height="600"></svg>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

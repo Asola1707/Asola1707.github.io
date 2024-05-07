@@ -1,0 +1,412 @@
+[
+ {
+   "Year": 1980,
+   "London": 9.56,
+   "Birmingham": 9.19,
+   "Manchester": 8.55,
+   "Leeds": 8.52,
+   "Sheffield": 8.38,
+   "Glasgow": 8.11,
+   "Cardiff": 9.68
+ },
+ {
+   "Year": 1981,
+   "London": 9.57,
+   "Birmingham": 9.03,
+   "Manchester": 8.29,
+   "Leeds": 8.3,
+   "Sheffield": 8.19,
+   "Glasgow": 7.86,
+   "Cardiff": 9.66
+ },
+ {
+   "Year": 1982,
+   "London": 10.26,
+   "Birmingham": 9.78,
+   "Manchester": 9.05,
+   "Leeds": 8.95,
+   "Sheffield": 8.94,
+   "Glasgow": 8.67,
+   "Cardiff": 10.29
+ },
+ {
+   "Year": 1983,
+   "London": 10.42,
+   "Birmingham": 9.89,
+   "Manchester": 9.15,
+   "Leeds": 9.1,
+   "Sheffield": 9.03,
+   "Glasgow": 8.81,
+   "Cardiff": 10.38
+ },
+ {
+   "Year": 1984,
+   "London": 10.03,
+   "Birmingham": 9.63,
+   "Manchester": 8.93,
+   "Leeds": 8.85,
+   "Sheffield": 8.72,
+   "Glasgow": 8.83,
+   "Cardiff": 10.23
+ },
+ {
+   "Year": 1985,
+   "London": 9.23,
+   "Birmingham": 8.68,
+   "Manchester": 8.05,
+   "Leeds": 8.1,
+   "Sheffield": 7.97,
+   "Glasgow": 7.71,
+   "Cardiff": 9.21
+ },
+ {
+   "Year": 1986,
+   "London": 9.17,
+   "Birmingham": 8.59,
+   "Manchester": 7.88,
+   "Leeds": 7.89,
+   "Sheffield": 7.71,
+   "Glasgow": 7.76,
+   "Cardiff": 8.99
+ },
+ {
+   "Year": 1987,
+   "London": 9.48,
+   "Birmingham": 8.88,
+   "Manchester": 8.21,
+   "Leeds": 8.17,
+   "Sheffield": 8.09,
+   "Glasgow": 8,
+   "Cardiff": 9.47
+ },
+ {
+   "Year": 1988,
+   "London": 10.09,
+   "Birmingham": 9.6,
+   "Manchester": 8.95,
+   "Leeds": 8.88,
+   "Sheffield": 8.8,
+   "Glasgow": 8.84,
+   "Cardiff": 10.1
+ },
+ {
+   "Year": 1989,
+   "London": 11.05,
+   "Birmingham": 10.3,
+   "Manchester": 9.46,
+   "Leeds": 9.56,
+   "Sheffield": 9.44,
+   "Glasgow": 9.04,
+   "Cardiff": 11.03
+ },
+ {
+   "Year": 1990,
+   "London": 11,
+   "Birmingham": 10.58,
+   "Manchester": 9.54,
+   "Leeds": 9.62,
+   "Sheffield": 9.58,
+   "Glasgow": 9.15,
+   "Cardiff": 11.02
+ },
+ {
+   "Year": 1991,
+   "London": 9.67,
+   "Birmingham": 9.23,
+   "Manchester": 8.56,
+   "Leeds": 8.54,
+   "Sheffield": 8.46,
+   "Glasgow": 8.53,
+   "Cardiff": 9.72
+ },
+ {
+   "Year": 1992,
+   "London": 10.19,
+   "Birmingham": 9.61,
+   "Manchester": 8.92,
+   "Leeds": 8.91,
+   "Sheffield": 8.87,
+   "Glasgow": 8.58,
+   "Cardiff": 10.09
+ },
+ {
+   "Year": 1993,
+   "London": 9.97,
+   "Birmingham": 9.25,
+   "Manchester": 8.5,
+   "Leeds": 8.44,
+   "Sheffield": 8.36,
+   "Glasgow": 8.26,
+   "Cardiff": 9.88
+ },
+ {
+   "Year": 1994,
+   "London": 10.84,
+   "Birmingham": 10.1,
+   "Manchester": 9.23,
+   "Leeds": 9.16,
+   "Sheffield": 9.14,
+   "Glasgow": 8.65,
+   "Cardiff": 10.54
+ },
+ {
+   "Year": 1995,
+   "London": 10.88,
+   "Birmingham": 10.41,
+   "Manchester": 9.61,
+   "Leeds": 9.6,
+   "Sheffield": 9.5,
+   "Glasgow": 8.99,
+   "Cardiff": 10.91
+ },
+ {
+   "Year": 1996,
+   "London": 9.56,
+   "Birmingham": 9.13,
+   "Manchester": 8.42,
+   "Leeds": 8.4,
+   "Sheffield": 8.26,
+   "Glasgow": 8.31,
+   "Cardiff": 9.51
+ },
+ {
+   "Year": 1997,
+   "London": 10.99,
+   "Birmingham": 10.49,
+   "Manchester": 9.8,
+   "Leeds": 9.72,
+   "Sheffield": 9.64,
+   "Glasgow": 9.52,
+   "Cardiff": 10.68
+ },
+ {
+   "Year": 1998,
+   "London": 10.76,
+   "Birmingham": 10.26,
+   "Manchester": 9.56,
+   "Leeds": 9.5,
+   "Sheffield": 9.42,
+   "Glasgow": 9.14,
+   "Cardiff": 10.64
+ },
+ {
+   "Year": 1999,
+   "London": 11.14,
+   "Birmingham": 10.59,
+   "Manchester": 9.87,
+   "Leeds": 9.81,
+   "Sheffield": 9.76,
+   "Glasgow": 9.17,
+   "Cardiff": 10.86
+ },
+ {
+   "Year": 2000,
+   "London": 10.81,
+   "Birmingham": 10.2,
+   "Manchester": 9.5,
+   "Leeds": 9.3,
+   "Sheffield": 9.29,
+   "Glasgow": 9,
+   "Cardiff": 10.54
+ },
+ {
+   "Year": 2001,
+   "London": 10.52,
+   "Birmingham": 9.93,
+   "Manchester": 9.16,
+   "Leeds": 9.11,
+   "Sheffield": 9.07,
+   "Glasgow": 8.61,
+   "Cardiff": 10.3
+ },
+ {
+   "Year": 2002,
+   "London": 11.2,
+   "Birmingham": 10.51,
+   "Manchester": 9.7,
+   "Leeds": 9.73,
+   "Sheffield": 9.69,
+   "Glasgow": 9.16,
+   "Cardiff": 10.81
+ },
+ {
+   "Year": 2003,
+   "London": 11,
+   "Birmingham": 10.51,
+   "Manchester": 9.66,
+   "Leeds": 9.55,
+   "Sheffield": 9.55,
+   "Glasgow": 9.23,
+   "Cardiff": 10.75
+ },
+ {
+   "Year": 2004,
+   "London": 10.95,
+   "Birmingham": 10.44,
+   "Manchester": 9.67,
+   "Leeds": 9.69,
+   "Sheffield": 9.63,
+   "Glasgow": 9.28,
+   "Cardiff": 10.77
+ },
+ {
+   "Year": 2005,
+   "London": 10.87,
+   "Birmingham": 10.42,
+   "Manchester": 9.67,
+   "Leeds": 9.63,
+   "Sheffield": 9.56,
+   "Glasgow": 9.24,
+   "Cardiff": 10.76
+ },
+ {
+   "Year": 2006,
+   "London": 11.42,
+   "Birmingham": 10.84,
+   "Manchester": 10.04,
+   "Leeds": 9.97,
+   "Sheffield": 9.96,
+   "Glasgow": 9.38,
+   "Cardiff": 11.05
+ },
+ {
+   "Year": 2007,
+   "London": 11.1,
+   "Birmingham": 10.46,
+   "Manchester": 9.9,
+   "Leeds": 9.7,
+   "Sheffield": 9.67,
+   "Glasgow": 9.38,
+   "Cardiff": 10.99
+ },
+ {
+   "Year": 2008,
+   "London": 10.63,
+   "Birmingham": 9.94,
+   "Manchester": 9.3,
+   "Leeds": 9.25,
+   "Sheffield": 9.18,
+   "Glasgow": 8.76,
+   "Cardiff": 10.29
+ },
+ {
+   "Year": 2009,
+   "London": 10.75,
+   "Birmingham": 10.08,
+   "Manchester": 9.38,
+   "Leeds": 9.36,
+   "Sheffield": 9.27,
+   "Glasgow": 8.97,
+   "Cardiff": 10.31
+ },
+ {
+   "Year": 2010,
+   "London": 9.59,
+   "Birmingham": 8.98,
+   "Manchester": 8.15,
+   "Leeds": 8.17,
+   "Sheffield": 8.1,
+   "Glasgow": 7.61,
+   "Cardiff": 9.27
+ },
+ {
+   "Year": 2011,
+   "London": 11.38,
+   "Birmingham": 10.89,
+   "Manchester": 9.98,
+   "Leeds": 9.92,
+   "Sheffield": 9.97,
+   "Glasgow": 9.29,
+   "Cardiff": 11.04
+ },
+ {
+   "Year": 2012,
+   "London": 10.33,
+   "Birmingham": 9.64,
+   "Manchester": 8.92,
+   "Leeds": 8.84,
+   "Sheffield": 8.79,
+   "Glasgow": 8.45,
+   "Cardiff": 10.08
+ },
+ {
+   "Year": 2013,
+   "London": 10.09,
+   "Birmingham": 9.63,
+   "Manchester": 8.9,
+   "Leeds": 8.97,
+   "Sheffield": 8.86,
+   "Glasgow": 8.66,
+   "Cardiff": 10.1
+ },
+ {
+   "Year": 2014,
+   "London": 11.67,
+   "Birmingham": 10.96,
+   "Manchester": 10.24,
+   "Leeds": 10.13,
+   "Sheffield": 10.08,
+   "Glasgow": 9.62,
+   "Cardiff": 11.3
+ },
+ {
+   "Year": 2015,
+   "London": 11.15,
+   "Birmingham": 10.4,
+   "Manchester": 9.43,
+   "Leeds": 9.47,
+   "Sheffield": 9.47,
+   "Glasgow": 8.69,
+   "Cardiff": 10.77
+ },
+ {
+   "Year": 2016,
+   "London": 10.98,
+   "Birmingham": 10.37,
+   "Manchester": 9.64,
+   "Leeds": 9.53,
+   "Sheffield": 9.49,
+   "Glasgow": 8.95,
+   "Cardiff": 10.72
+ },
+ {
+   "Year": 2017,
+   "London": 11.21,
+   "Birmingham": 10.7,
+   "Manchester": 9.88,
+   "Leeds": 9.87,
+   "Sheffield": 9.84,
+   "Glasgow": 9.2,
+   "Cardiff": 10.98
+ },
+ {
+   "Year": 2018,
+   "London": 11.44,
+   "Birmingham": 10.72,
+   "Manchester": 9.92,
+   "Leeds": 9.79,
+   "Sheffield": 9.82,
+   "Glasgow": 8.99,
+   "Cardiff": 10.97
+ },
+ {
+   "Year": 2019,
+   "London": 11.11,
+   "Birmingham": 10.39,
+   "Manchester": 9.67,
+   "Leeds": 9.59,
+   "Sheffield": 9.56,
+   "Glasgow": 9.12,
+   "Cardiff": 10.86
+ },
+ {
+   "Year": 2020,
+   "London": 12.53,
+   "Birmingham": 11.74,
+   "Manchester": 10.77,
+   "Leeds": 10.68,
+   "Sheffield": 10.7,
+   "Glasgow": 9.91,
+   "Cardiff": 11.95
+ }
+]

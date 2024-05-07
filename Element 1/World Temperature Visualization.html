@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>World Temperature Visualisation</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            border: 2px solid black;
+            color: #332929;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: rgb(228, 171, 14);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        nav {
+            background-color: #151616;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        nav ol {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav li {
+            margin: 5px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: rgb(53, 43, 24);
+        }
+        
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: justify;
+        }
+        
+        h1 {
+            font-size: 36px;
+            color: black;
+            margin-top: 0;
+        }
+        
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+        
+        .chart-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+        
+        .chart-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 250px;
+            margin: 20px;
+            color: white;
+            background-color: #442626;
+            border: 1px solid #333;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .chart-box:hover {
+            background-color: rgb(13, 27, 145);
+        }
+        
+        .chart-name {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+        
+        .presented-by {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .member-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>World Temperature Visualisation</h1>
+    <p>Explore temperature variations across the world through interactive data visualisations</p>
+</header>
+
+<nav>
+    <ol>
+        <li>
+            <a href="http://127.0.0.1:5500/Element%201/Omere/SAMUEL.html">
+                <div class="chart-box">
+                    <img src="Uyi_Samuel_Omere.jpeg" alt="Uyi Samuel Omere" class="member-img">
+                    <div class="chart-name">Multiple Line Chart</div>
+                    <div class="presented-by">Presented by UYI SAMUEL OMERE</div>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="http://127.0.0.1:5500/Element%201/Oyeranti/index.html">
+                <div class="chart-box">
+                    <img src="Oyeranti_Oluwaseun.jpeg" alt="Oyeranti Oluwaseun" class="member-img">
+                    <div class="chart-name">Scatter Plot</div>
+                    <div class="presented-by">Presented by OYERANTI OLUWASEUN</div>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="http://127.0.0.1:5500/Element%201/Suleiman/Fatima_Stacked_Column.html">
+                <div class="chart-box">
+                    <img src="Suleiman_Fatima.jpeg" alt="Suleiman Fatima" class="member-img">
+                    <div class="chart-name">Stacked Bar Chart</div>
+                    <div class="presented-by">Presented by SULEIMAN FATIMA</div>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="http://127.0.0.1:5500/Element%201/Okafor/World%20Temperature.html">
+                <div class="chart-box">
+                    <img src="Okafor_Chukwuma.jpg" alt="Okafor Chukwuma" class="member-img">
+                    <div class="chart-name">World Map</div>
+                    <div class="presented-by">Presented by OKAFOR CHUKWUMA</div>
+                </div>
+            </a>
+        </li>
+    </ol>
+</nav>
+
+<section>
+    <h2>About the Project</h2>
+    <p>This project visualises data from the World Temperature dataset repository from Kaggle.
+        Our dataset offers an extensive view of temperature trends, capturing time-series values in degrees Celsius for the 1000 most populous cities worldwide, spanning from January 1, 1980, to September 30, 2020. Comprising 24 columns, the data encompasses a broad spectrum of information related to city temperatures, trends, and variations. Through in-depth analysis, we have successfully uncovered significant patterns and insights within this vast dataset. These findings are poised to inform strategic decisions and enhance understanding of global climate trends, potentially influencing both local and international environmental strategies. 
+        
+        Through these visualisations, we aim to:</p>
+    <ul>
+        <li>Show the change in temperature of cities in the United Kingdom over the years grouped by region using Interactive Multiple Line Chart.</li>
+        <li>Study the relationship between population and average decade temperature scores over time for Cities in the United Kingdom (1980-2020) using Interactive Scatter Plot.</li>
+        <li>Study the temperature trends and compare across seven cities in the United Kingdom over time for top and bottom-ranked countries using Interactive Stacked Bar Chart.</li>
+        <li>Explore the minimum, maximum and average temperature scores from 2010-2019 (a decade) across the world Using Interactive World Map.</li>     
+    </ul>
+</section>
+
+</body>
+</html>

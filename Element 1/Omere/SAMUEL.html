@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+    <title>Interactive Visualisation Group Temp - Team Member 3</title>
+    <style>
+    /* set the CSS */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    /* Styling for the main container */
+    .container {
+        max-width: 960px;
+        margin: 20px auto;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        line-height: 1.2; 
+        margin-left: auto; 
+        margin-right: auto;
+    }
+    /* Author Name Style */
+    .author {
+        font-size: 14px; 
+        font-style: italic; 
+        text-align: right; 
+        margin-top: 10px; 
+    }
+    /* Heading style */
+    h2 {
+        text-align: center;
+        color: #35495e;
+    }
+    /* SVG specific styles */
+    .line {
+        fill: none;
+        stroke-width: 2px;
+    }
+    /* Dot Style for SVG Circles */
+    .dot {
+        fill: blue;
+        stroke: #000;
+    }
+    /* Tooltip Configuration */
+    .tooltip {
+        position: absolute;
+        text-align: center;
+        width: 120px;
+        height: 40px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background: white;
+        border: 1px solid #000;
+        border-radius: 8px;
+        pointer-events: none;
+        opacity: 0;
+    }
+    /* Legend style */
+    .legend {
+        font-size: 12px;
+        cursor: pointer;
+    }
+    /* axis label style */
+    .axis-label {
+        fill: black;
+        font-size: 14px;
+        font-family: 'Arial', sans-serif;
+    }
+    /* Enhancements for interactivity */
+    .dot:hover {
+        fill: red;
+    }
+    .line.active {
+        stroke-width: 4px;
+    }
+    .line.inactive {
+        opacity: 0.5;
+    }
+    /* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+        .container {
+            width: 95%;
+            margin: 10px auto;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <nav><a href="../World%20Temperature%20Visualization.html">Home</a></nav>
+    <div class="container">
+        <div class="author">Uyi Samuel Omere / D3209619</div>
+        
+         <!-- Section Heading -->
+        <h2>Historical Temperature Analysis of Major UK Cities (1980-2020)</h2>
+        
+        <!-- Prompt to select a region -->
+        <p>Select the region you are interested in:</p>
+
+         <!-- Radio buttons for selecting a region -->
+        <div>
+            <input type="radio" name="region" value="All" checked>All
+            <input type="radio" name="region" value="North">North
+            <input type="radio" name="region" value="West">West
+            <input type="radio" name="region" value="Central">Central
+            <input type="radio" name="region" value="South">South
+            <input type="radio" name="region" value="East">East
+
+        </div>
+
+        <!-- load the d3.js library -->
+        <script src='https://d3js.org/d3.v7.min.js'></script>
+        <script>
+
+            // load the JSON data
+            d3.json('City_UK.json').then(data => {
+                // Map city names to their corresponding geographical regions
+                const directionMapping = {
+                    'Sheffield': 'East',
+                    'Nottingham': 'East',
+                    'Newcastle': 'North',
+                    'Bristol': 'South',
+                    'Liverpool': 'West',
+                    'Manchester': 'Central',
+                    'Southend-on-Sea': 'East',
+                    'Glasgow': 'North',
+                    'London': 'South',
+                    'Caerdydd': 'West',
+                    'Leeds': 'Central',
+                    'Birmingham': 'Central'
+                };
+
+                /* Filters temperature data for major UK cities based on the selected geographical region.*/
+                function filteredData(region) {
+                    if (region === 'All') {
+                        return data;
+                    } else {
+                        return Object.fromEntries(
+                            Object.entries(data).map(([year, cities]) => [
+                                year, 
+                                Object.fromEntries(
+                                    Object.entries(cities).filter(([city]) => directionMapping[city] === region)
+                                )
+                            ])
+                        );
+                    }
+                }
+
+                // Function to initialize the line chart with default data set to 'All' regions
+                buildLineChart(filteredData('All'));
+
+                // Event listener setup on radio buttons for region selection
+                d3.selectAll("input[name='region']").on('change', function() {
+                   
+                    // Remove the existing SVG to prevent overlays when new data is selected
+                    d3.select('svg').remove();
+
+                    // Rebuild the line chart based on the selected region's data
+                    buildLineChart(filteredData(this.value));
+                });
+
+                function buildLineChart(data) {
+                    // Set dimensions and margins for the chart
+                    const margin = { top: 20, right: 120, bottom: 50, left: 70 },
+                          width = 960 - margin.left - margin.right,
+                          height = 500 - margin.top - margin.bottom;
+
+                    // Create an SVG canvas for the chart
+                    const svg = d3.select('body').append('svg')
+                                  .attr('width', width + margin.left + margin.right)
+                                  .attr('height', height + margin.top + margin.bottom)
+                                  .append('g')
+                                  .attr('transform', `translate(${margin.left},${margin.top})`);
+
+
+                    // Parse the data for cities and transform into an array for plotting
+                    const cities = Object.keys(data).flatMap(year => 
+                        Object.keys(data[year]).map(city => ({
+                            name: city,
+                            year: +year,
+                            value: data[year][city]
+                        }))
+                    );
+
+                    //Calculate Y-axis Domain
+                    const yMin = d3.min(cities, d => d.value);
+                    const yMax = d3.max(cities, d => d.value);
+                    const yBuffer = (yMax - yMin) * 0.1;
+
+                    // Extract unique city names from the 'cities' array using Set and spread syntax
+                    const cityNames = [...new Set(cities.map(city => city.name))];
+                    // Create an ordinal scale for colors
+                    const color = d3.scaleOrdinal(d3.schemeCategory10).domain(cityNames);
+
+                    // Scales for the chart
+                    const x = d3.scaleLinear()
+                                .domain(d3.extent(cities, d => d.year))
+                                .range([0, width]);
+                    const y = d3.scaleLinear()
+                                .domain([yMin - yBuffer, yMax + yBuffer])
+                                .range([height, 0]);
+
+                    // x Axis setup
+                    svg.append('g')
+                       .attr('transform', `translate(0, ${height})`)
+                       .call(d3.axisBottom(x).tickFormat(d3.format('d')))
+                       .append('text')
+                       .attr('class', 'axis-label')
+                       .attr('x', width / 2)
+                       .attr('y', 35)
+                       .style('text-anchor', 'middle')
+                       .text('Year');
+
+                    // y Axis setup
+                    svg.append('g')
+                       .call(d3.axisLeft(y))
+                       .append('text')
+                       .attr('class', 'axis-label')
+                       .attr('transform', 'rotate(-90)')
+                       .attr('y', -50)
+                       .attr('x', -height / 2)
+                       .attr('dy', '1em')
+                       .style('text-anchor', 'middle')
+                       .text('Temperature (°C)');
+
+                    // Line generator for the cities
+                    const line = d3.line()
+                                   .x(d => x(d.year))
+                                   .y(d => y(d.value));
+                        
+                                   
+                    // Initialize a tooltip               
+                    const tooltip = d3.select('body').append('div')
+                                      .attr('class', 'tooltip');
+
+
+                    // Group data by city name to draw multiple lines
+                    cityNames.forEach(name => {
+                        const cityData = cities.filter(city => city.name === name);
+                        const cityGroup = svg.append('g');
+                        const path = cityGroup.append('path')
+                                      .datum(cityData)
+                                      .attr('class', 'line')
+                                      .style('stroke', color(name))
+                                      .attr('d', line);
+
+                        // Animated SVG Path Drawing //
+                        const totalLength = path.node().getTotalLength();
+                         path.attr('stroke-dasharray', totalLength + ' ' + totalLength)
+                             .attr('stroke-dashoffset', totalLength)
+                             .transition()
+                             .duration(2000)
+                             .ease(d3.easeLinear)
+                             .attr('stroke-dashoffset', 0);
+
+                        /* dots creation on the line */
+                        cityGroup.selectAll('.dot')
+                            .data(cityData)
+                            .enter().append('circle')
+                            .attr('class', 'dot')
+                            .attr('cx', d => x(d.year))
+                            .attr('cy', d => y(d.value))
+                            .attr('r', 0)
+                            .style('fill', color(name))
+                            .on('mouseover', function(event, d) {
+                                tooltip.transition()
+                                    .duration(200)
+                                    .style('opacity', .9);
+                                 tooltip.html(`City: ${d.name}<br>Year: ${d.year}<br>Value: ${d.value}`)
+                                    .style('left', (event.pageX) + 'px')
+                                    .style('top', (event.pageY - 28) + 'px');
+                            })
+                            .on('mouseout', function() {
+                                tooltip.transition()
+                                    .duration(500)
+                                    .style('opacity', 0);
+                            })
+                            .transition()
+                            .delay((d, i) => i * 200)
+                            .duration(500)
+                            .attr('r', 3);
+                    });
+
+                    // Create a legend element for each city, dynamically generated from the `cityNames` data.
+                    const legend = svg.selectAll(".legend")
+                        .data(cityNames)
+                        .enter().append("g")
+                        .attr("class", "legend")
+                        .attr("transform", (d, i) => "translate(0," + i * 20 + ")")
+                        .on('click', function(event, d) {
+
+                            // Get the city name from the data bound to the clicked legend item.
+                            const cityName = d;
+
+                            // Highlight or dim the city line in the chart based on the clicked legend item.
+                            svg.selectAll('.line')
+                                .classed('active', function (lineData) {
+                                    return lineData[0].name === cityName; // Corrected: This line checks if the line's city name matches the legend's city name
+                                })
+                                .classed('inactive', function (lineData) {
+                                    return lineData[0].name !== cityName;
+                                });
+
+                            // Adjust the opacity of the legend's rectangles to indicate selection.    
+                            legend.selectAll('rect')
+                                .style('opacity', function (legendData) {
+                                    return legendData === cityName ? 1 : 0.5; // Adjust opacity based on the selection
+                                });
+
+                            // Similarly, adjust the text opacity in the legend for visual feedback.
+                            legend.selectAll('text')
+                                .style('opacity', function (legendData) {
+                                    return legendData === cityName ? 1 : 0.5;
+                                });
+                        });
+
+
+                    // Initialize SVG for legend
+                    legend.append("rect")
+                        .attr("x", width + 18)
+                        .attr("width", 18)
+                        .attr("height", 18)
+                        .style("fill", color);
+
+                    // Append text elements to the legend.
+                    legend.append("text")
+                        .attr("x", width + 44)
+                        .attr("y", 9)
+                        .attr("dy", ".35em")
+                        .style("text-anchor", "start")
+                        .text(d => d);
+                }
+            });
+        </script>
+    </div>
+</body>

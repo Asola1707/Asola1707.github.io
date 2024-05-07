@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>World Map Visualization</title>
+    <!-- fetch the D3js library -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            border: 2px solid black;
+            text-align: center;
+        }
+
+        div {
+            font-size: small;
+        }
+
+        button#MIN_Temperature_button.selected {
+            background-color: #a5c9e2; /* blue */
+        }
+
+        button#MAX_Temperature_button.selected {
+            background-color: #ffb347; /* orange */
+        }
+
+        button#AVG_Temperature_button.selected {
+            background-color: #b3e0be; /* green */
+        }
+
+        .tooltip {
+            position: absolute;
+            padding: 6px;
+            background-color: rgba(3, 1, 1, 0.8);
+            color: #ffffff;
+            font-size: small;
+            border-radius: 1px;
+            pointer-events: none;
+        }
+
+        #student-details {
+            border: 1px solid black;
+            width: 100%;
+            background-color: rgb(196, 136, 26);
+        }
+
+        #chart-description {
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            width: 300px;
+            height: auto;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid gray;
+            padding: 10px;
+            font-size: 10px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+<nav><a href="../World%20Temperature%20Visualization.html">Home</a></nav>
+<section id="student-details">
+    <p>Chukwuma Okafor | D3041895</p>
+</section>
+<h2>World Map</h2>
+<!-- Display options for the user to choose from -->
+<div>
+    <label for="year_option">Select Year:</label>
+    <select id="year_option">
+        <option value="2010">2010</option>
+        <option value="2011">2011</option>
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+    </select>
+    <label>Metric Score:</label>
+    <button id="MIN_Temperature_button" class="selected">MIN_Temp</button>
+    <button id="MAX_Temperature_button">MAX_Temp</button>
+    <button id="AVG_Temperature_button">AVG_Temp</button>
+</div>
+<div id="tooltip" style="position: absolute; visibility: hidden;"></div>
+<script>
+    // Load the dataset
+    d3.csv("World Temperature.csv").then(function(data) {
+
+        // Define the dimensions of the SVG element
+        const width = 960;
+        const height = 600;
+
+        // Create the SVG element
+        const svg = d3.select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        // Create a projection for the map
+        const projection = d3.geoMercator()
+            .scale(130)
+            .translate([width / 2, height / 1.5]);
+
+        // Load the geojson data for the world map
+        d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then(function (geojson) {
+
+            // Create a color scale for Temperature
+            let MIN_TemperatureColorScale = d3.scaleSequential()
+                .domain(d3.extent(data, function (d) {
+                    return +d.MIN_Temp;
+                }))
+                .interpolator(d3.interpolateBlues);
+
+            let MAX_TemperatureColorScale = d3.scaleSequential()
+                .domain(d3.extent(data, function (d) {
+                    return +d.MAX_Temp;
+                }))
+                .interpolator(d3.interpolateOranges);
+
+            let AVG_TemperatureColorScale = d3.scaleSequential()
+                .domain(d3.extent(data, function (d) {
+                    return +d.AVG_Temp;
+                }))
+                .interpolator(d3.interpolateGreens);
+
+            // Create a color scale for the selected metric
+            let colorScale = MIN_TemperatureColorScale;
+
+            // Add an event listener to the year selection dropdown
+            d3.select("#year_option").on("change", function () {
+                updateMap(data, this.value);
+            });
+
+            // Add event listeners to the metric buttons
+            d3.select("#MIN_Temperature_button").on("click", function () {
+                d3.selectAll("button").classed("selected", false);
+                d3.select(this).classed("selected", true);
+
+                colorScale = MIN_TemperatureColorScale;
+                updateMap(data, d3.select("#year_option").property("value"));
+            });
+
+            d3.select("#MAX_Temperature_button").on("click", function () {
+                d3.selectAll("button").classed("selected", false);
+                d3.select(this).classed("selected", true);
+
+                colorScale = MAX_TemperatureColorScale;
+                updateMap(data, d3.select("#year_option").property("value"));
+            });
+
+            d3.select("#AVG_Temperature_button").on("click", function () {
+                d3.selectAll("button").classed("selected", false);
+                d3.select(this).classed("selected", true);
+
+                colorScale = AVG_TemperatureColorScale;
+                updateMap(data, d3.select("#year_option").property("value"));
+            });
+
+            // Create a function to update the map
+            function updateMap(data, year) {
+                // Filter the data by year
+                let filteredData = data.filter(function (d) {
+                    return d.Year === year;
+                });
+
+                // Remove the previous map elements
+                svg.selectAll("path").remove();
+
+                // Create a new map using the filtered data
+                let countries = svg.selectAll("path")
+                    .data(geojson.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath().projection(projection))
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 0.5)
+                    .style("opacity", 0.9)
+                    .style("fill", function (d) {
+                        let countryData = filteredData.find(function (c) {
+                            return c.Country === d.properties.name;
+                        });
+                        if (countryData !== undefined) {
+                            if (colorScale === MIN_TemperatureColorScale) {
+                                return MIN_TemperatureColorScale(countryData.MIN_Temp);
+                            } else if (colorScale === MAX_TemperatureColorScale) {
+                                return MAX_TemperatureColorScale(countryData.MAX_Temp);
+                            } else {
+                                return AVG_TemperatureColorScale(countryData.AVG_Temp);
+                            }
+                        } else {
+                            return "#d3d3d3";
+                        }
+                    });
+
+                // Add a tooltip
+                const tooltip = d3.select("body")
+                    .append("div")
+                    .style("opacity", 0)
+                    .style("font-size", "11px")
+                    .attr("class", "tooltip")
+                    .style("background-color", "black")
+                    .style("border", "solid")
+                    .style("border-width", "1px")
+                    .style("border-radius", "5px")
+                    .style("padding", "10px");
+
+                // Add event listeners to show/hide tooltip
+                countries.on("mouseover", function (event, d) {
+                    d3.select(this).attr("stroke-width", 2).style("opacity", 1); // darken the country path
+                    let countryName = d.properties.name;
+                    let metricScore = "";
+                    let countryData = filteredData.find(function (c) {
+                        return c.Country === d.properties.name;
+                    });
+                    if (countryData !== undefined) {
+                        if (colorScale === MIN_TemperatureColorScale) {
+                            metricScore = "MIN_Temp: " + countryData.MIN_Temp;
+                        } else if (colorScale === MAX_TemperatureColorScale) {
+                            metricScore = "MAX_Temp: " + countryData.MAX_Temp;
+                        } else {
+                            metricScore = "AVG_Temp: " + countryData.AVG_Temp;
+                        }
+                    } else {
+                        metricScore = "No Data Available";
+                    }
+                    tooltip.html("<strong>" + countryName + "</strong><br>" + metricScore);
+                    tooltip.style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 20) + "px")
+                        .transition()
+                        .duration(200)
+                        .style("opacity", 0.9);
+                }).on("mouseout", function () {
+                    d3.select(this).attr("stroke-width", 0.5).style("opacity", 0.9); // restore the original opacity
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0); // hide the tooltip
+                });
+            }
+
+            // Call the updateMap function to initialize the map
+            updateMap(data, d3.select("#year_option").property("value"));
+        });
+    });
+</script>
+<section id="chart-description">
+    <p>The map visualizes the minimum, maximum, and average temperature of countries for a decade (2010-2019) around the world.
+        The map is color-coded based on temperature, with darker colors indicating higher temperatures
+        and lighter colors indicating lower temperatures. The year can be selected using the dropdown menu above the map.
+    </p>
+</section>
+</body>
+</html>
